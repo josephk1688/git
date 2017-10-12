@@ -93,6 +93,7 @@ if __name__ == '__main__':
                                 pass
     
     print('end of execute..Total Files:%s'%format(i,',') + ', %s KB'%format(totalsize / 1024.0, ','))
+    print('end ..')
     print(time.asctime(time.localtime(time.time())))
     sqlstr = 'select b.filename,a.md5,a.filesize from filemd5 a inner join filemd5 b on a.md5=b.md5 '
     sqlstr += ' where a.filename in ( SELECT filename FROM filemd5 group by md5  having count (*) >= 2 order by filesize )'
@@ -100,6 +101,7 @@ if __name__ == '__main__':
         cursor = conn.execute(sqlstr)
         for rows in cursor:
             print("File:{} MD5:{} filesize:{}".format(rows[0], rows[1], format(rows[2], ',')))
+            print('*' * 50)
     except:
         pass
     
